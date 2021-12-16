@@ -28,3 +28,4 @@ spec:
           image: nunofilipecosta/subjectactor:dev
           ports:
             - containerPort: 80
+          imagePullPolicy: Always

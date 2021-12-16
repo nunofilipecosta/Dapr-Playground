@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Dapr;
 using System.Text;
 using System.Text.Json;
+using CloudNative.CloudEvents;
 
 namespace Topic.Listener.Controllers;
 
@@ -16,20 +17,29 @@ public class TopicListenerController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet]
+    public ActionResult Get()
+    {
+        _logger.LogCritical("TopicListenerController executed");
+        return Ok("endpoint ping");
+    }
+
     [HttpPost("/receiver")]
-    [Topic("TopicPubSub", "TopicName")]
-    public async Task<IActionResult> Receiver([FromBody] byte[] cloudEvent)
+    [Topic("topicpubsub", "listenerweatherforecast")]
+    public async Task<IActionResult> Receiver([FromBody] CloudEvent cloudEvent)
     {
         try
         {
-            _logger.LogInformation(Encoding.UTF8.GetString(cloudEvent));
+            var weatherForecast = JsonSerializer.Deserialize<WeatherForecast>(cloudEvent.Data.ToString());
 
-            var weatherForecast = JsonSerializer.Deserialize<WeatherForecast>(cloudEvent);
+            if (weatherForecast != null)
+            {
+                _logger.LogInformation($"The weather is {weatherForecast.Summary} its {weatherForecast.TemperatureC} !");
+            }
 
-            _logger.LogInformation($"The weather is {weatherForecast.Summary} !");
 
             await Task.CompletedTask;
-            return Ok();
+            return Ok("message received");
         }
         catch (Exception exception)
         {
