@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subject-actor
+  namespace: dapr-playground
+  labels:
+    app: subject-actor
+spec:
+  selector:
+    matchLabels:
+      app : subject-actor
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: subject-actor
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "subject-actor"
+        dapr.io/app-port: "80"
+        dapr.io/enable-profiling: "true"
+        dapr.io/config: "dapr-playground-config"
+    spec:
+      containers:
+        - name: subject-actor
+          image: nunofilipecosta/subjectactor:dev
+          ports:
+            - containerPort: 80
