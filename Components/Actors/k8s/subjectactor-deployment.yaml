@@ -28,4 +28,19 @@ spec:
           image: nunofilipecosta/subjectactor:dev
           ports:
             - containerPort: 80
-          imagePullPolicy: Always
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: subject-actor-service
+  namespace: dapr-playground
+  labels: 
+    app: subject-actor
+spec:
+  type: NodePort
+  selector:
+    app: subject-actor
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP

@@ -1,0 +1,19 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: topicpubsub
+  namespace: dapr-playground
+spec:
+  type: pubsub.kafka
+  version: v1
+  metadata:
+    - name: brokers # Required. Kafka broker connection setting
+      value: ""
+    - name: consumerGroup # Optional. Used for input bindings.
+      value: ""
+    - name: authRequired # Required.
+      value: "true"
+    - name: saslUsername # Required if authRequired is `true`.
+      value: "$ConnectionString"
+    - name: saslPassword # Required if authRequired is `true`.
+      value: ""

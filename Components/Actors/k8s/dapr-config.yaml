@@ -1,0 +1,16 @@
+kind: Configuration
+apiVersion: dapr.io/v1alpha1
+metadata:
+  name: dapr-playground-config
+  namespace: dapr-playground
+spec:
+  tracing:
+    samplingRate: "0"
+    zipkin:
+      endpointAddress: http://localhost:9411/api/v2/spans
+  metric:
+    enabled: true
+  mtls:
+    enabled: true
+    workloadCertTTL: 24h
+    allowedClockSkew: 15m

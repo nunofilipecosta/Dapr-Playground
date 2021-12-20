@@ -44,16 +44,3 @@ spec:
   - port: 80
     targetPort: 80
     protocol: TCP
-
---- 
-apiVersion: dapr.io/v1alpha1
-kind: Subscription
-metadata:
-  name: topicsubscription
-  namespace: dapr-playground
-spec:
-  topic: tq-city-inspector-eh-location-events-dev
-  route: /receiver
-  pubsubname: topicpubsub
-scopes:
- - topic-listener

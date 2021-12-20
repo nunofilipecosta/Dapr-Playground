@@ -8,7 +8,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Components/bindings/Subject.Actor/Subject.Actor.csproj",
+                "${workspaceFolder}/Components/Actors/Subject.Actor/Subject.Actor.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -21,7 +21,20 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Components/bindings/Topic.Listener/Topic.Listener.csproj",
+                "${workspaceFolder}/Components/PubSub/Topic.Listener/Topic.Listener.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "group": "build",
+            "label": "build binding",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Components/bindings/Subject.Binding/Subject.Binding.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
