@@ -8,9 +8,9 @@ spec:
   version: v1
   metadata:
     - name: brokers # Required. Kafka broker connection setting
-      value: ""
+      value: "snowiq-eh-namespace-dev.servicebus.windows.net:9093"
     - name: consumerGroup # Optional. Used for input bindings.
-      value: ""
+      value: "$Default"
     - name: topics # Optional. Used for input bindings.
       value: ""
     - name: authRequired # Required.

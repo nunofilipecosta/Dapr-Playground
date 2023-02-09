@@ -1,0 +1,7 @@
+controller:
+  podAnnotations:
+    dapr.io/enabled: "true"
+    dapr.io/app-id: "ingress-nginx"
+    dapr.io/port: "80"
+    dapr.io/log-as-json: "true"
+    dapr.io/sidecar-listen-addresses: "0.0.0.0"

@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-app
+  namespace: dapr-playground
+  labels:
+    name: app
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "kubernetes.docker.internal"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/app1-service(/|$)(.*)"
+            backend:
+              service:
+                name: app1-service
+                port:
+                  number: 80
+    - host: "kubernetes.docker.internal"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/app2-service(/|$)(.*)"
+            backend:
+              service:
+                name: app2-service
+                port:
+                  number: 80
